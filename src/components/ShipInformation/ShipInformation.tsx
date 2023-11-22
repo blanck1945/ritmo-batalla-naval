@@ -1,5 +1,4 @@
 import { useGameState } from "../../context/game.context";
-import { ShipToken } from "../../types/types";
 import ShipAvatar from "./Ship/Ship";
 
 const ShipInformation = () => {
@@ -7,7 +6,7 @@ const ShipInformation = () => {
 
   return (
     <div className="grid grid-cols-2 sm:gap-2 lg:flex lg:gap-4 lg:flex-col">
-      {state.shipInfo.map((ship: ShipToken) => {
+      {state.shipInfo.map((ship: any) => {
         return (
           <ShipAvatar
             key={ship.shipName}
