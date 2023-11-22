@@ -1,13 +1,18 @@
+import { useBoardState } from "../context/board.context";
 import Square from "./Square/Square";
 
-const Board = ({ shipsPosition }) => {
-  const borderRows = 10;
-  const borderCols = 10;
+const Board = () => {
+  const borderRows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+  const borderCols = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  const positionHasShip = (row, col) => {
-    const hasShip = shipsPosition
+  const state = useBoardState();
+
+  if (state.isLoading) return <div>Loading...</div>;
+
+  const positionHasShip = (num: number, el: string) => {
+    const hasShip = state?.shipsPosition
       .map((ship: any) => {
-        if (ship.cols.includes(col) && ship.rows.includes(row)) {
+        if (ship.shipPosition.includes(`${num}${el}`)) {
           return ship.shipName;
         }
       })
@@ -17,20 +22,17 @@ const Board = ({ shipsPosition }) => {
   };
 
   return (
-    <div className="border-yellow-500 border-4">
-      {Array.from({ length: borderCols }).map((_, colIndex) => {
+    <div className="border-yellow-500 border-8 sm:border-4 w-full sm:w-auto lg:w-auto m-auto lg:m-0 ">
+      {borderCols.map((num, colIndex) => {
         return (
           <div key={colIndex} className="flex">
-            {Array.from({ length: borderRows }).map((_, rowIndex) => {
+            {borderRows.map((el, rowIndex) => {
               return (
                 <>
                   <Square
                     key={rowIndex}
-                    squareHasShip={positionHasShip(colIndex, rowIndex)}
+                    squareHasShip={positionHasShip(num, el)}
                   />
-                  {/* <p>{colIndex}</p>
-                  <p>{rowIndex}</p>
-                  <p>Ship info: {positionHasShip(colIndex, rowIndex)}</p> */}
                 </>
               );
             })}

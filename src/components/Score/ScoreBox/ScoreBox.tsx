@@ -3,14 +3,19 @@ import Separator from "../../Utils/Separator";
 
 interface ScoreBoxProps {
   bg: string;
+  playerName: string;
 }
 
-const ScoreBox: FC<ScoreBoxProps> = ({ bg }) => {
+const ScoreBox: FC<ScoreBoxProps> = ({ bg, playerName }) => {
   return (
-    <div className={`w-1/2 h-1/2 p-4 ${bg}`}>
-      <p>00</p>
+    <div className={`w-full p-4 lg:h-auto ${bg}`}>
+      <p className="text-center text-xl lg:text-5xl font-bold mb-3 lg:mb-6">
+        00
+      </p>
       <Separator />
-      <p>Player 1</p>
+      <p className="text-center text-sm lg:text-2xl font-bold mt-1 lg:mt-2">
+        {playerName}
+      </p>
     </div>
   );
 };

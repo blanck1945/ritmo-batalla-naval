@@ -15,19 +15,26 @@ export const directions = {
 
 export type DirectionType = (typeof directions)[keyof typeof directions];
 
+export type ShipToken = {
+  shipName: string;
+  shipLength: number;
+  shipDamage: number;
+  shipImage: string;
+};
+
 export type Ship = {
   shipName: string;
   shipLength: number;
+  shipImage?: string;
 };
 
 export type ShipPosition = Ship & {
-  rows: number[];
-  cols: number[];
+  shipPosition: string[];
   position: string;
 };
 
 export type VariablesToCalculateShipPosition = {
   row: number;
-  col: number;
+  col: string;
   position: DirectionType;
 };
